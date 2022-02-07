@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { useQuery } from '@apollo/client'
+import { Route, Routes } from 'react-router-dom'
+import { GET_QUOTES_QUERY } from './quotesQueries'
+import { GET_QUOTES } from './constants'
 
-function App() {
+import AppContents from './AppContents'
+import QuotesForm from './QuotesForm'
+import './App.css'
+
+function App({ dispatch }) {
+  const { data } = useQuery(GET_QUOTES_QUERY)
+  useEffect(() => {
+    if (data && data.getQuotes.total) {
+      dispatch({ type: GET_QUOTES, payload: data.getQuotes.data })
+    }
+  }, [data, dispatch])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route exact path="" element={<AppContents />} />
+        <Route exact path="/add" element={<QuotesForm />} />
+      </Routes>
     </div>
   );
 }
 
-export default App;
+export default connect()(App)
