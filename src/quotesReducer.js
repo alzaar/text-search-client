@@ -1,9 +1,11 @@
 import {
-  GET_QUOTES
+  GET_QUOTES,
+  EMPTY_RESULT
 } from './constants'
 
 const initialState = {
-  quotes: []
+  quotes: [],
+  emptyResult: false
 }
 
 export default function quotesReducer(state = initialState, action) {
@@ -12,6 +14,11 @@ export default function quotesReducer(state = initialState, action) {
       return {
         ...state,
         quotes: action.payload
+      }
+    case EMPTY_RESULT:
+      return {
+        ...state,
+        emptyResult: action.payload
       }
     default:
       return state

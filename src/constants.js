@@ -1,1 +1,5 @@
 export const GET_QUOTES = 'GET_QUOTES'
+export const UPDATE_FILTER = 'UPDATE_FILTER'
+export const UPDATE_PAGE = 'UPDATE_PAGE'
+export const UPDATE_SEARCH_VALUE = 'UPDATE_SEARCH_VALUE'
+export const EMPTY_RESULT = 'EMPTY_RESULT'

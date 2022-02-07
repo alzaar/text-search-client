@@ -1,7 +1,12 @@
-export default function Button({ children, style }) {
+import './button.css'
+export default function Button({ children, style, onClick, className }) {
   return (
     <>
-      <button style={style}>
+      <button
+        onClick={onClick}
+        style={style}
+        className={`${className} simple-btn`}
+      >
         {children}
       </button>
     </>

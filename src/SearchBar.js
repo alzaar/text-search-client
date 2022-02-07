@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { useApolloClient  } from '@apollo/client'
 
 import './searchbar.css'
-import { GET_QUOTES } from './constants'
+import { GET_QUOTES, UPDATE_FILTER, UPDATE_PAGE, UPDATE_SEARCH_VALUE } from './constants'
 import filterIcon from './assets/filter.svg'
 import searchIcon from './assets/glass.svg'
 
@@ -63,6 +63,9 @@ function SearchBar({ dispatch }) {
     const { data } = res
     if (data && data.getFilteredQuotes.total) {
       dispatch({ type: GET_QUOTES, payload: data.getFilteredQuotes.data })
+      dispatch({ type: UPDATE_FILTER, payload: filter })
+      dispatch({ type: UPDATE_PAGE, payload: '0' })
+      dispatch({ type: UPDATE_SEARCH_VALUE, payload: value })
     }
   }).catch(e => console.log(e))
   }
